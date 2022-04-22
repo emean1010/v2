@@ -16,6 +16,7 @@ cd /var/www/
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 # 替换 v2ray 设置文件
 cp /var/www/v2/config.json /usr/local/etc/v2ray/config.json
+# cp /var/www/v2/config1.json /usr/local/etc/v2ray/config.json
 
 service v2ray restart
 
