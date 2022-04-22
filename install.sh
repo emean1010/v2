@@ -3,7 +3,7 @@
 
 apt update
 
-apt install -y git zsh curl
+apt install -y git zsh curl nginx
 
 # 开启Google BBR （可选）显示 tcp_bbr 20480 0 这类结果则表示开启成功。
 echo 'net.core.default_qdisc=fq' | tee -a /etc/sysctl.conf
@@ -18,7 +18,10 @@ bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/
 cp /var/www/v2/config.json /usr/local/etc/v2ray/config.json
 # cp /var/www/v2/config1.json /usr/local/etc/v2ray/config.json
 
+cp /var/www/v2/v2.nginx /etc/nginx/nginx.conf
+
 service v2ray restart
+service nginx restart
 
 echo 'succsss'
 echo 'ip'

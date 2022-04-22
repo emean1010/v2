@@ -1,34 +1,50 @@
 {
-  "inbounds": [
-    {
-      "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "66f59786-abf8-4433-86cc-080f471c5de2",
-            "alterId": 0
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/v2ray/v2ray.crt",
-              "keyFile": "/etc/v2ray/v2ray.key"
-            }
-          ]
+  "log": {
+    "loglevel": "warning",
+    "access": "/dev/null",
+    "error": "/dev/null"
+  },
+  "inbounds": [{
+    "listen":"127.0.0.1",
+    "port": 3000,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "66f59786-abf8-4433-86cc-080f471c5de2",
+          "level": 1,
+          "alterId": 0
         }
-      }
+      ]
+    },
+	"streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+        "path": "/bannedbook"
+        }
     }
-  ],
+  }],
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "allowed"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
     }
-  ]
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
 }
