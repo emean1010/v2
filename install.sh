@@ -2,7 +2,6 @@
 # 2. 执行 bash install.sh
 
 apt update
-
 apt install -y git zsh curl nginx
 
 # 开启Google BBR （可选）显示 tcp_bbr 20480 0 这类结果则表示开启成功。
@@ -16,9 +15,14 @@ cd /var/www/
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 # 替换 v2ray 设置文件
 cp /var/www/v2/config.json /usr/local/etc/v2ray/config.json
+# 测试配置是否生效
+/usr/local/bin/v2ray -test -config /usr/local/etc/v2ray/config.json
 # cp /var/www/v2/config1.json /usr/local/etc/v2ray/config.json
 
+# 替换 nginx 设置文件
 cp /var/www/v2/v2.nginx /etc/nginx/nginx.conf
+# 测试配置是否生效
+nginx -t
 
 service v2ray restart
 service nginx restart
